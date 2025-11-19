@@ -26,17 +26,36 @@ function updateClock() {
 
   const milliseconds = diff; // whatever remains
 
-  // Format as dd:hh:mm:ss:ssss
-  const formatted =
-    `${pad(days, 2)}:` +
-    `${pad(hours, 2)}:` +
-    `${pad(minutes, 2)}:` +
-    `${pad(seconds, 2)}:` +
-    `${pad(milliseconds, 4)}`;
+  // Format the time parts
+  const formattedDays = pad(days, 2);
+  const formattedHours = pad(hours, 2);
+  const formattedMinutes = pad(minutes, 2);
+  const formattedSeconds = pad(seconds, 2);
+  const formattedMilliseconds = pad(milliseconds, 4);
 
-  document.getElementById("clock").textContent = formatted;
+  // Function to update a flip digit
+  function flipDigit(element, newValue) {
+    const front = element.querySelector(".front");
+    const back = element.querySelector(".back");
+
+    if (front.textContent !== newValue) {
+      front.textContent = newValue;
+      back.textContent = newValue;
+      element.classList.add("flipping");
+      setTimeout(() => {
+        element.classList.remove("flipping");
+      }, 500);
+    }
+  }
+
+  // Update each digit
+  flipDigit(document.getElementById("days"), formattedDays);
+  flipDigit(document.getElementById("hours"), formattedHours);
+  flipDigit(document.getElementById("minutes"), formattedMinutes);
+  flipDigit(document.getElementById("seconds"), formattedSeconds);
+  flipDigit(document.getElementById("milliseconds"), formattedMilliseconds);
 }
 
-// update rapidly (every 25 ms feels smooth)
+// Update the clock every 25 milliseconds for smooth animation
 setInterval(updateClock, 25);
 updateClock();
