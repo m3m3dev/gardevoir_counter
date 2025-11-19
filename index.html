@@ -3,28 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Days Since October 12, 2025</title>
+  <title>Time Since October 12, 2025</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Arial", sans-serif;
       text-align: center;
-      margin-top: 50px;
-      background-color: #f0f0f0;
+      padding-top: 50px;
+      background: #f0f0f0;
     }
     h1 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .flip-clock {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+      font-family: "Courier New", monospace;
+      font-size: 4rem;
       color: #333;
     }
-    .clock {
+
+    .flip-clock .digit {
+      width: 60px;
+      height: 80px;
+      background: #333;
+      color: #fff;
+      margin: 0 5px;
+      text-align: center;
+      line-height: 80px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .flip-clock .digit.flipping {
+      animation: flip 0.5s ease-in-out;
+    }
+
+    .flip-clock .digit .front,
+    .flip-clock .digit .back {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backface-visibility: hidden;
       font-size: 2rem;
-      font-weight: bold;
-      color: #4CAF50;
+    }
+
+    .flip-clock .digit .back {
+      transform: rotateX(180deg);
+    }
+
+    /* Flip animation */
+    @keyframes flip {
+      0% {
+        transform: rotateX(0deg);
+      }
+      50% {
+        transform: rotateX(90deg);
+      }
+      100% {
+        transform: rotateX(180deg);
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Days Since Gardevoir has won a major</h1>
-  <div class="clock" id="clock">Calculating...</div>
+  <h1>Time Since October 12, 2025</h1>
+  <div class="flip-clock">
+    <div class="digit" id="days">
+      <div class="front">00</div>
+      <div class="back">00</div>
+    </div>
+    <div class="digit" id="hours">
+      <div class="front">00</div>
+      <div class="back">00</div>
+    </div>
+    <div class="digit" id="minutes">
+      <div class="front">00</div>
+      <div class="back">00</div>
+    </div>
+    <div class="digit" id="seconds">
+      <div class="front">00</div>
+      <div class="back">00</div>
+    </div>
+    <div class="digit" id="milliseconds">
+      <div class="front">0000</div>
+      <div class="back">0000</div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
